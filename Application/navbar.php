@@ -1,5 +1,7 @@
 <a href="home.php" color="#FFCA28"><h4> Taxi Demand Predictor </h4></a>
 
+<button><a href="http://127.0.0.1:13858/custom/googleVis/MotionChartIDd85417e1451d.html"> Taxi Analysis </a></button>
+
 <form class="search" action="search_new.php" align="left" method="post">       
       <div class="searchbox">
         <select id="hashtag" name="locationtag">                      

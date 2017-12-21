@@ -29,7 +29,7 @@
         echo ' var locations = [ ';
         while ((($data = fgetcsv($file)) !== FALSE)) {
           if($data[0] == $input){
-        echo "[". $data[1].",".$data[2]."],";
+        echo "[". $data[1].",".$data[2].",".$data[3]."],";
           }
         }
         echo '];';
@@ -39,29 +39,26 @@
       for (var i =0; i < locations.length; i++) {
         var lat = locations[i][0];
         var longitude = locations[i][1];
+        var hour = locations[i][2];
         latlngset = new google.maps.LatLng(lat, longitude);
 
         var infomarker = new google.maps.Marker({  
           map: map, 
           title: "loan", 
           icon: "http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png",
-          position: latlngset  
+          position: latlngset 
           });
-        gmarkers.push(infomarker);
+        
+        var content = "<u>Time: </u>" + hour + ":00";
+        var infowindow = new google.maps.InfoWindow()
+        google.maps.event.addListener(infomarker,'click', (function(infomarker,content,infowindow){ 
+          return function() {
+            infowindow.setContent(content);
+            infowindow.open(map,infomarker);
+          };
+        })(infomarker,content,infowindow)); 
       }
-      for (var i =0; i < events.length; i++) {
-        var lat = events[i][0];
-        var longitude = events[i][1];
-        latlngset2 = new google.maps.LatLng(lat, longitude);
-
-        var infomarker2 = new google.maps.Marker({  
-          map: map, 
-          title: "loan", 
-          icon: "https://www.google.com/mapfiles/arrow.png",
-          position: latlngset2  
-          });
-        gmarkers.push(infomarker2);
-      }
+      
 
 }
     </script>
